@@ -11,7 +11,7 @@ public class Main {
 		checkTimeManager.combineSameTimes();
 		
 		checkTimeManager.giveOutputOnColsole(30, 200);
-		checkTimeManager.giveOutputToFile(30, 200, "gp2.csv");
+		checkTimeManager.giveOutputToFile(30, 200, "Subevent_Interval.csv");
 
 		
 		

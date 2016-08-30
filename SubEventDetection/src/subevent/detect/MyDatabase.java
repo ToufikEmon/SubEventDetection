@@ -53,7 +53,6 @@ public class MyDatabase {
 	}
 
 	public ResultSet executeQueryAndGiveBackTheDataList(String query) {
-		System.out.println(query);
 		try {
 			st = con.createStatement();
 			return st.executeQuery(query);

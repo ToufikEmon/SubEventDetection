@@ -91,7 +91,7 @@ public class CheckTimeManager {
 
 		len = now.size();
 		for (int i = 0; i < len; i++) {
-			System.out.println(now.get(i) + "            " + i);
+			System.out.println(i+" -----> "+now.get(i));
 		}
 		System.err.println("Console print is done!!");
 
