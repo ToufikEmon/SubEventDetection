@@ -53,7 +53,7 @@ public class LastOuput {
 
 				}
 
-				writeCsv(str, i);
+				writeCsv(str, i, now.get(i).getStart(), now.get(i).getEnd());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -62,11 +62,14 @@ public class LastOuput {
 
 	}
 
-	private void writeCsv(String[][] csvMatrix, int fileNumber) {
+	private void writeCsv(String[][] csvMatrix, int fileNumber, String a, String b) {
 
 		ICsvListWriter csvWriter = null;
+		a = a.replaceAll(":", "_");
+		b = b.replaceAll(":", "_");
+
 		try {
-			csvWriter = new CsvListWriter(new FileWriter("Subevent_" + String.valueOf(fileNumber) + ".csv"),
+			csvWriter = new CsvListWriter(new FileWriter("ValueGreaterThreshold/Subevent_" + a + "_To_" + b + ".csv"),
 					CsvPreference.STANDARD_PREFERENCE);
 
 			for (int i = 0; i < csvMatrix.length; i++) {

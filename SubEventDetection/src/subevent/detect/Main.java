@@ -10,12 +10,19 @@ public class Main {
 		checkTimeManager.sortAll();
 		checkTimeManager.combineSameTimes();
 		
+		
+		//1
 		checkTimeManager.giveOutputOnColsole(30, 200);
-		checkTimeManager.giveOutputToFile(30, 200, "Subevent_Interval.csv");
+		//2
+		checkTimeManager.giveOutputToFile(30, 200, "ValueGreaterThreshold/Subevent_Interval_For_Greater_Than_Treshold.csv");
+		checkTimeManager.giveOutputToAFileWhereTheValueIsBelowThreshold(30, 200, "ValueBelowThreshold/Subevent_Interval_For_Lower_Than_Treshold.csv");
+		//3
+		checkTimeManager.giveOutputToFileAllUsingGivenTime(30, 200, "alloutput.csv");
+		
 
 		
 		
 		System.err.println("End Programme");
 	}
 
-}
+} 

@@ -72,7 +72,13 @@ public class CheckTimeManager {
 				l++;
 			}
 
-			if (counter > y) {
+			/*
+			 * 
+			 * vai y er valui hoilo 200 ei
+			 * check ta less than korlei hobe
+			 * tobe protekta method er jono korte hobe
+			 */
+			if (counter < y) {
 				if (st == true) {
 					og.setStart(timeList.get(i).toString());
 					end = true;
@@ -115,7 +121,7 @@ public class CheckTimeManager {
 				counter += timeList.get(i + j).getCounter();
 				l++;
 			}
-
+			
 			if (counter > y) {
 				if (st == true) {
 					og.setStart(timeList.get(i).toString());
@@ -180,9 +186,10 @@ public class CheckTimeManager {
 		StringBuilder output1 = new StringBuilder();
 		output1.append("From , To , Total \n");
 		for (int i = 0; i < len; i++) {
-			if (now.get(i).inBoundary(y)) {
+			/*if (now.get(i).inBoundary(y)) {
 				output1.append(now.get(i));
-			}
+			}*/
+			output1.append(now.get(i).getValue());
 		}
 
 		try {
@@ -193,6 +200,63 @@ public class CheckTimeManager {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
+	}
+	
+	public void giveOutputToAFileWhereTheValueIsBelowThreshold(int howManySecondPerClock, int overFlowBoundary, String fileName){
+		int x = howManySecondPerClock;
+		int y = overFlowBoundary;
+
+		int len = timeList.size();
+		List<OutputGenerator> then = new ArrayList<>();
+		boolean st = true, end = false;
+		OutputGenerator og = new OutputGenerator();
+
+		for (int i = 0, l = 0; i < len; i += l) {
+			l = 0;
+
+			int counter = timeList.get(i).getCounter();
+
+			for (int j = 0; j < x && i + j < len; j++) {
+				counter += timeList.get(i + j).getCounter();
+				l++;
+			}
+			 
+			if (counter<  y) {
+				if (st == true) {
+					og.setStart(timeList.get(i).toString());
+					end = true;
+					st = false;
+				}
+			} else {
+				if (end == true) {
+					end = false;
+					st = true;
+					og.setEnd(timeList.get(i).toString());
+					then.add(og);
+					og = new OutputGenerator();
+				}
+			}
+		}
+
+		len = then.size();
+		StringBuilder output1 = new StringBuilder();
+		output1.append("FromF , Total \n");
+		for (int i = 0; i < len; i++) {
+			output1.append(then.get(i));
+		}
+
+		try {
+			PrintWriter pw1 = new PrintWriter(new File(fileName));
+			pw1.write(output1.toString());
+			pw1.close();
+			System.err.println("Saving to A File is Done");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		LastOutput2 lastOuput2 = new LastOutput2();
+		lastOuput2.giveOuput(then);
 
 	}
 

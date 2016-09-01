@@ -45,6 +45,10 @@ public class OutputGenerator {
 	public String toString() {
 		return String.format("%s , %s \n", start, end);
 	}
+	
+	public String getValue(){
+		return String.format("%s , %s ,%d\n", start, end,counter);
+	}
 
 	public int getCount() {
 		// TODO Auto-generated method stub
